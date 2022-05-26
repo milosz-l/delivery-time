@@ -1,10 +1,10 @@
 DATE_FORMAT = "%Y-%m-%dT%H:%M:%S"
 PRICE_TRESHOLD = 100_000    # for outliers
 WEIGHT_TRESHOLD = 50        # for outliers
-NUM_OF_HOURS = 12
+NUM_OF_HOURS = 24
 SEED = 42
 
-COLS_TO_DROP_ALWAYS = ["delivery_timestamp",
+COLS_TO_DROP_ALWAYS = ("delivery_timestamp",
                        "session_id",
                        "purchase_id",
                        "event_type",
@@ -12,4 +12,4 @@ COLS_TO_DROP_ALWAYS = ["delivery_timestamp",
                        "user_id",
                        'offered_discount',
                        'optional_attributes',
-                       'purchase_timestamp']
+                       'purchase_timestamp')

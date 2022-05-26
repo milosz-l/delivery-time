@@ -83,7 +83,7 @@ class TimeDiffDataTransformer:
             additional_cols = ["city_and_street",
                                "brand",
                                'product_name']
-        cols_to_drop = COLS_TO_DROP_ALWAYS.copy()
+        cols_to_drop = list(COLS_TO_DROP_ALWAYS)
         cols_to_drop.extend(additional_cols)
         self.df = self.df.drop(columns=cols_to_drop)
 
@@ -94,15 +94,17 @@ class TimeDiffDataTransformer:
         return df
 
     def one_hot_encoding_columns(self):
-        cols = set(["delivery_company",
-                    "city",
-                    "street",
-                    "city_and_street",
-                    'brand',
-                    'product_name',
-                    "category_path",
-                    'day_of_week',
-                    'product_id'].extend(COLS_TO_DROP_ALWAYS))
+        cols = ["delivery_company",
+                "city",
+                "street",
+                "city_and_street",
+                'brand',
+                'product_name',
+                "category_path",
+                'day_of_week',
+                'product_id']
+        cols.extend(COLS_TO_DROP_ALWAYS)
+        cols = set(cols)
         cols_in_df = set(self.df.columns.values.tolist())
         cols_to_one_hot = cols.intersection(cols_in_df)
         for col_name in cols_to_one_hot:
@@ -125,6 +127,9 @@ class TimeDiffDataTransformer:
         self.drop_cols(additional_cols=additional_cols_to_drop)
         self.one_hot_encoding_columns()
         self.normalize_min_max()
+
+    def get_df(self):
+        return self.df.copy()
 
     def to_csv(self, file_name='df_from_TimeDiffDataTransformer.csv'):
         self.df.to_csv(filename)
