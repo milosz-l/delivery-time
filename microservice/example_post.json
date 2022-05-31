@@ -1,6 +1,6 @@
 {
     "purchase_id": "21356",
-    "purchase_timestamp": "07.07.2022, 6:30 AM",
+    "purchase_timestamp": "2021-11-07T06:22:13",
     "delivery_company": 620,
 
     "product_id": 1013,
@@ -15,7 +15,7 @@
     "optional_attributes.depth_cm": "-",
 
     "session_id": 21000,
-    "timestamp": "07.07.2022, 6:10 AM",
+    "timestamp": "2021-11-07T06:10:33",
     "event_type": "BUY PRODUCT",
     "offered_discount": "0",
     
