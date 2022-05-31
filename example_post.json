@@ -1,4 +1,4 @@
-{
+[{
     "purchase_id": "21356",
     "purchase_timestamp": "2021-11-07T06:22:13",
     "delivery_company": 620,
@@ -9,18 +9,17 @@
     "price": 129,
     "brand": "Trust",
     "weight_kg": 0.58,
-    "optional_attributes.height_cm": "-",
-    "optional_attributes.width_cm": "-",
-    "optional_attributes.color": "czarny",
-    "optional_attributes.depth_cm": "-",
+    "optional_attributes": "-",
 
     "session_id": 21000,
-    "timestamp": "2021-11-07T06:10:33",
     "event_type": "BUY PRODUCT",
     "offered_discount": "0",
     
     "user_id": 113,
     "name": "Ada Klaus",
     "city": "Wrocław",
-    "street": "pl. Spółdzielcza 129"
-}
+    "street": "pl. Spółdzielcza 129",
+    "day_of_week": "Monday",
+    "city and street": "Wrocław pl. Spółdzielcza 129"
+    
+}]

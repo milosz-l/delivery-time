@@ -20,6 +20,8 @@ class TimeDiffDataTransformer:
         users_df = pd.read_json("data/users.jsonl", lines=True)
 
         self.df = TimeDiffDataTransformer._prepare_df(sessions_df, deliveries_df, products_df, users_df)
+        print("S", self.df)
+
 
     def _prepare_df(sessions_df, deliveries_df, products_df, users_df):
         # 1.
