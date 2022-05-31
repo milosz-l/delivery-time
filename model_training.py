@@ -59,26 +59,28 @@ from sklearn.ensemble import RandomForestRegressor
 
 time_diff_data = TimeDiffDataTransformer()
 
-
-print("DF", df)
 time_diff_data.make_all_transformations()
 df = time_diff_data.get_df()
 
 X_train, X_test, y_train, y_test = split_data(df)
 
-# # models
-models_list = [Ridge(alpha=0.1),
-               Lasso(alpha=0.1),
-               DecisionTreeRegressor(random_state=SEED),
-               RandomForestRegressor(random_state=SEED)]
 
-# # training model
-models_list = train_models(models_list, X_train, y_train)
+def getTrainedModels():
+    # # models
+    models_list = [Ridge(alpha=0.1),
+                Lasso(alpha=0.1),
+                DecisionTreeRegressor(random_state=SEED),
+                RandomForestRegressor(random_state=SEED)]
 
+    # # training model
+    models_list = train_models(models_list, X_train, y_train)
+    return models_list
+
+
+models_list = getTrainedModels()
 
 y_pred_df = create_df_with_predictions(models_list, X_test, y_test)
 # display_predictions(y_pred_df)
-
 
 # # printing results
 print_scores(models_list, X_test, y_test)
