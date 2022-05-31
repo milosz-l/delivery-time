@@ -1,0 +1,26 @@
+{
+    "purchase_id": "21356",
+    "purchase_timestamp": "07.07.2022, 6:30 AM",
+    "delivery_company": 620,
+
+    "product_id": 1013,
+    "product_name": "Słuchawki nauszne Trust GXT 488 Forze",
+    "category_path": "Mikrofony i słuchawki;Słuchawki przewodowe",
+    "price": 129,
+    "brand": "Trust",
+    "weight_kg": 0.58,
+    "optional_attributes.height_cm": "-",
+    "optional_attributes.width_cm": "-",
+    "optional_attributes.color": "czarny",
+    "optional_attributes.depth_cm": "-",
+
+    "session_id": 21000,
+    "timestamp": "07.07.2022, 6:10 AM",
+    "event_type": "BUY PRODUCT",
+    "offered_discount": "0",
+    
+    "user_id": 113,
+    "name": "Ada Klaus",
+    "city": "Wrocław",
+    "street": "pl. Spółdzielcza 129"
+}
