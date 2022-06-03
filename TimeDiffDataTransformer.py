@@ -10,7 +10,7 @@ from TimeDiffConstants import DATE_FORMAT, PRICE_TRESHOLD, WEIGHT_TRESHOLD, NUM_
 
 
 class TimeDiffDataTransformer:
-    def __init__(self):
+    def __init__(self, request_df=None):
         # fact table
         sessions_df = pd.read_json("data/sessions.jsonl", lines=True)
 
@@ -20,7 +20,8 @@ class TimeDiffDataTransformer:
         users_df = pd.read_json("data/users.jsonl", lines=True)
 
         self.df = TimeDiffDataTransformer._prepare_df(sessions_df, deliveries_df, products_df, users_df)
-        print("S", self.df)
+        if request_df:
+            self.df.append(request_df)
 
 
     def _prepare_df(sessions_df, deliveries_df, products_df, users_df):
