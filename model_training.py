@@ -60,17 +60,21 @@ def print_percent_of_good_predictions(models_list, X_test, y_test, error=NUM_OF_
         print(f'which is {percent_of_good_predictions * 100}% for +-{round(error/60/60)} hours\n')
 
 
-warnings.filterwarnings('ignore')
-# # preparing data
-time_diff_data = TimeDiffDataTransformer()
+def prepareData():
+    # # preparing data
+    time_diff_data = TimeDiffDataTransformer()
 
-time_diff_data.make_all_transformations()
-df = time_diff_data.get_df()
+    time_diff_data.make_all_transformations()
+    df = time_diff_data.get_df()
 
-X_train, X_test, y_train, y_test = split_data(df)
+    X_train, X_test, y_train, y_test = split_data(df)
+    return X_train, X_test, y_train, y_test
 
 
-def getTrainedModels():
+def getTrainedModels(X_train=None, y_train=None):
+    if not X_train or not y_train:
+        X_train, X_test, y_train, y_test = prepareData()
+
     # # models
     # models_list = [Ridge(alpha=0.1),
     #                Lasso(alpha=0.1),
@@ -85,14 +89,18 @@ def getTrainedModels():
     return models_list, times
 
 
-models_list, times = getTrainedModels()
+if __name__ == "__main__":
+    warnings.filterwarnings('ignore')
 
-y_pred_df = create_df_with_predictions(models_list, X_test, y_test)
-# display_predictions(y_pred_df)
+    X_train, X_test, y_train, y_test = prepareData()
+    models_list, times = getTrainedModels()
 
-# # printing results
-print_scores(models_list, X_test, y_test, times)
+    y_pred_df = create_df_with_predictions(models_list, X_test, y_test)
+    # display_predictions(y_pred_df)
 
-print_percent_of_good_predictions(models_list, X_test, y_test)
+    # # printing results
+    print_scores(models_list, X_test, y_test, times)
 
-print_percent_of_good_predictions(models_list, X_test, y_test, error=NUM_OF_HOURS/2*60*60)
+    print_percent_of_good_predictions(models_list, X_test, y_test)
+
+    print_percent_of_good_predictions(models_list, X_test, y_test, error=NUM_OF_HOURS/2*60*60)
