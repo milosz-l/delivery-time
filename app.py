@@ -55,6 +55,7 @@ def handleRequest():
     # preprocessing data
     df = pd.DataFrame(data)
     df = preprocessData(df)
+    purchase_timestamp = df["purchase_timestamp"]
 
     # transformations
     new_data = TimeDiffDataTransformer(df)
@@ -71,5 +72,11 @@ def handleRequest():
     y_pred_df = create_df_with_predictions(models, x_test, y_test)
     print("Predictions", y_pred_df)
 
+    # calculating final prediction - predicted date of delivery
+    delivery_timestamp = purchase_timestamp + datetime.timedelta(0, y_pred_df["RandomForestRegressor prediction"][0])
+    print("Predicted delivery: ", delivery_timestamp[0])
+
     # return "OK"
-    return y_pred_df.to_dict()
+    return {
+        "RandomForestRegressor prediction": delivery_timestamp[0]
+    }
