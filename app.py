@@ -7,13 +7,7 @@ from TimeDiffConstants import *
 
 app = Flask(__name__)
 
-time_diff_data = TimeDiffDataTransformer()
-
-time_diff_data.make_all_transformations()
-df_trained = time_diff_data.get_df()
-
 models = getTrainedModels()
-
 
 def preprocessData(df):
 

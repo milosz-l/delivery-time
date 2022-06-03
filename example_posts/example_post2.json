@@ -1,25 +1,25 @@
 [{
-    "purchase_id": "21357",
-    "purchase_timestamp": "2021-10-09T12:51:11",
-    "delivery_company": "360",
+    "purchase_id": 20000,
+    "purchase_timestamp": "2021-11-07T06:15:13",
+    "delivery_company": 360,
 
-    "product_id": "1181",
-    "product_name": "Pad bezprzewodowy Ipega PG-9076",
-    "category_path": "Urządzenia wskazujące;Pady",
-    "price": "97",
-    "brand": "Ipega",
-    "weight_kg": "0.3",
+    "product_id": 1156,
+    "product_name": "Słuchawki nauszne Corsair HS35",
+    "category_path": "Mikrofony i słuchawki;Słuchawki przewodowe",
+    "price": 159.0,
+    "brand": "Corsair",
+    "weight_kg": 0.52,
     "optional_attributes": {
         "color": "czarny"
     },
 
-    "session_id": "21001",
-    "event_type": "BUY PRODUCT",
-    "offered_discount": "10",
+    "session_id": 125,
+    "event_type": "BUY_PRODUCT",
+    "offered_discount": 10,
     
-    "user_id": "105",
-    "name": "Roksana Mućka",
-    "city": "Radom",
-    "street": "pl. Perłowa 48"
+    "user_id": 102,
+    "name": "Monika Forysiak",
+    "city": "Wrocław",
+    "street": "plac Dębowa 11/53"
     
 }]
