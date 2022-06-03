@@ -20,8 +20,16 @@ class TimeDiffDataTransformer:
         users_df = pd.read_json("data/users.jsonl", lines=True)
 
         self.df = TimeDiffDataTransformer._prepare_df(sessions_df, deliveries_df, products_df, users_df)
-        if request_df:
-            self.df.append(request_df)
+        print("LEN", len(self.df))
+        if type(request_df) == pd.DataFrame:
+            self.df = pd.concat([self.df, request_df], ignore_index=True)
+            print("LEN2", len(self.df))
+            print("KEYS", len(self.df.keys()))
+            print("KEYS", self.df.keys())
+            print("DF", request_df)
+            print("DF", request_df.keys())
+            print("DF", len(request_df.keys()))
+            print("DF2", self.df.iloc[-1:])
 
 
     def _prepare_df(sessions_df, deliveries_df, products_df, users_df):
@@ -91,9 +99,16 @@ class TimeDiffDataTransformer:
         self.df = self.df.drop(columns=cols_to_drop)
 
     def _one_hot_encoding_single_col(df, col_name):
+        print("ONE HOT ENCODING SINGLE", col_name, "LEN DF", len(df))
         one_hot = pd.get_dummies(df[col_name], drop_first=False)
+        print("ONE HOT ENCODING SINGLE LEN", len(one_hot))
+        print("ONE HOT ENCODING", one_hot)
         df = df.drop(columns=col_name)
+        print("ONE HOT ENCODING AFTER DROP", len(df))
         df = df.join(one_hot)
+        print("ONE HOT ENCODING AFTER JOIN", len(df))
+        df = df.drop_duplicates()
+        print("ONE HOT ENCODING AFTER DROP DUPLICATES", len(df))
         return df
 
     def one_hot_encoding_columns(self):
@@ -112,7 +127,9 @@ class TimeDiffDataTransformer:
         cols_to_one_hot = cols.intersection(cols_in_df)
         for col_name in cols_to_one_hot:
             self.df = TimeDiffDataTransformer._one_hot_encoding_single_col(self.df, col_name)
+            print("AFTER COLUMN ENCODING", len(self.df))
         self.df = self.df.dropna()
+        print("AFTER COLUMN ENCODING DROPNA", len(self.df))
 
     def normalize_min_max(self):
         # specify columns for min-max scaling
