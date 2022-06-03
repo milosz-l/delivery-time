@@ -6,7 +6,7 @@ from sklearn.linear_model import LinearRegression, Ridge, Lasso, RidgeCV
 import pandas as pd
 import numpy as np
 from TimeDiffDataTransformer import TimeDiffDataTransformer
-from TimeDiffConstants import DATE_FORMAT, PRICE_TRESHOLD, WEIGHT_TRESHOLD, NUM_OF_HOURS, SEED, COLS_TO_DROP_ALWAYS
+from TimeDiffConstants import DATE_FORMAT, PRICE_TRESHOLD, WEIGHT_TRESHOLD, NUM_OF_HOURS, SEED, COLS_TO_DROP_ALWAYS, TEST_SIZE
 
 from sklearn.model_selection import GridSearchCV, train_test_split
 from sklearn.preprocessing import StandardScaler
@@ -14,10 +14,10 @@ import warnings
 import time
 
 
-def split_data(df, target_column="time_diff"):
+def split_data(df, target_column="time_diff", test_size=0.2):
     y = df["time_diff"].to_numpy()
     X = df.drop(columns="time_diff")
-    return train_test_split(X, y, test_size=0.2, random_state=SEED)
+    return train_test_split(X, y, test_size=test_size, random_state=SEED)
 
 
 def train_models(models_list, X_train, y_train):
@@ -60,14 +60,14 @@ def print_percent_of_good_predictions(models_list, X_test, y_test, error=NUM_OF_
         print(f'which is {percent_of_good_predictions * 100}% for +-{round(error/60/60)} hours\n')
 
 
-def prepareData():
+def prepareData(test_size=0.2):
     # # preparing data
     time_diff_data = TimeDiffDataTransformer()
 
     time_diff_data.make_all_transformations()
     df = time_diff_data.get_df()
 
-    X_train, X_test, y_train, y_test = split_data(df)
+    X_train, X_test, y_train, y_test = split_data(df, test_size=test_size)
     return X_train, X_test, y_train, y_test
 
 
@@ -92,7 +92,7 @@ def getTrainedModels(X_train=None, y_train=None):
 if __name__ == "__main__":
     warnings.filterwarnings('ignore')
 
-    X_train, X_test, y_train, y_test = prepareData()
+    X_train, X_test, y_train, y_test = prepareData(TEST_SIZE)
     models_list, times = getTrainedModels()
 
     y_pred_df = create_df_with_predictions(models_list, X_test, y_test)
