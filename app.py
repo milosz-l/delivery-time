@@ -7,7 +7,7 @@ from TimeDiffConstants import *
 
 app = Flask(__name__)
 
-models = getTrainedModels()
+models, times = getTrainedModels()
 
 def preprocessData(df):
 
@@ -73,10 +73,16 @@ def handleRequest():
     print("Predictions", y_pred_df)
 
     # calculating final prediction - predicted date of delivery
-    delivery_timestamp = purchase_timestamp + datetime.timedelta(0, y_pred_df["RandomForestRegressor prediction"][0])
-    print("Predicted delivery: ", delivery_timestamp[0])
+    # random forest
+    delivery_timestamp_random_forest = purchase_timestamp + datetime.timedelta(0, y_pred_df["RandomForestRegressor prediction"][0])
+    print("Predicted delivery (Random Forest): ", delivery_timestamp_random_forest[0])
+
+    # ridge
+    delivery_timestamp_ridge = purchase_timestamp + datetime.timedelta(0, y_pred_df["RidgeCV prediction"][0])
+    print("Predicted delivery (Ridge CV): ", delivery_timestamp_ridge[0])
 
     # return "OK"
     return {
-        "RandomForestRegressor prediction": delivery_timestamp[0]
+        "RandomForestRegressor prediction": delivery_timestamp_random_forest[0],
+        "Ridge prediction": delivery_timestamp_ridge[0]
     }
