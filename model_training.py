@@ -11,6 +11,7 @@ from TimeDiffConstants import DATE_FORMAT, PRICE_TRESHOLD, WEIGHT_TRESHOLD, NUM_
 from sklearn.model_selection import GridSearchCV, train_test_split
 from sklearn.preprocessing import StandardScaler
 import warnings
+import time
 
 
 def split_data(df, target_column="time_diff"):
@@ -20,9 +21,13 @@ def split_data(df, target_column="time_diff"):
 
 
 def train_models(models_list, X_train, y_train):
+    times = []
     for model in models_list:
+        start = time.time()
         model.fit(X_train.values, y_train)
-    return models_list
+        end = time.time()
+        times.append(end - start)
+    return models_list, times
 
 
 def create_df_with_predictions(models_list, X_test, y_test):
@@ -39,10 +44,10 @@ def display_predictions(y_pred_df):
     display(y_pred_df.describe())
 
 
-def print_scores(models_list, X_test, y_test):
-    for model in models_list:
+def print_scores(models_list, X_test, y_test, times):
+    for model, time in zip(models_list, times):
         score = model.score(X_test, y_test)
-        print(f"{type(model).__name__} score = {score}")
+        print(f"{type(model).__name__} score = {score}, training time = {time}s")
 
 
 def print_percent_of_good_predictions(models_list, X_test, y_test, error=NUM_OF_HOURS*60*60):
@@ -72,32 +77,21 @@ def getTrainedModels():
     #                RidgeCV(),
     #                DecisionTreeRegressor(random_state=SEED),
     #                RandomForestRegressor(random_state=SEED)]
-    param_grid = {
-        'bootstrap': [True],
-        'max_depth': [80, 90, 100, 110],
-        'max_features': [2, 3],
-        'min_samples_leaf': [3, 4, 5],
-        'min_samples_split': [8, 10, 12],
-        'n_estimators': [25, 50]
-    }
-    rf = RandomForestRegressor(random_state=SEED)
-    grid_search = GridSearchCV(estimator=rf, param_grid=param_grid, cv=3, n_jobs=-1, verbose=2)
-    print(grid_search.get_params())
-    # best_grid = grid_search.best_estimator_
-    models_list = [grid_search]
+    models_list = [RidgeCV(),
+                   RandomForestRegressor(random_state=SEED)]
 
     # # training model
-    models_list = train_models(models_list, X_train, y_train)
-    return models_list
+    models_list, times = train_models(models_list, X_train, y_train)
+    return models_list, times
 
 
-models_list = getTrainedModels()
+models_list, times = getTrainedModels()
 
 y_pred_df = create_df_with_predictions(models_list, X_test, y_test)
 # display_predictions(y_pred_df)
 
 # # printing results
-print_scores(models_list, X_test, y_test)
+print_scores(models_list, X_test, y_test, times)
 
 print_percent_of_good_predictions(models_list, X_test, y_test)
 
