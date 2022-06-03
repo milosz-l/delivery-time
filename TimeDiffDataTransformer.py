@@ -113,7 +113,7 @@ class TimeDiffDataTransformer:
         cols = set(cols)
         cols_in_df = set(self.df.columns.values.tolist())
         cols_to_one_hot = cols.intersection(cols_in_df)
-        print(self.df.columns)
+        # print(self.df.columns)
         for col_name in cols_to_one_hot:
             self.df = TimeDiffDataTransformer._one_hot_encoding_single_col(self.df, col_name)
         self.df = self.df.dropna()
