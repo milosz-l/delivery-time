@@ -1,36 +1,35 @@
 from flask import Flask, request
 from model_training import *
 import pandas as pd
+from TimeDiffDataTransformer import *
+from TimeDiffConstants import *
+
 
 app = Flask(__name__)
 
-models = getTrainedModels()
-
-from TimeDiffDataTransformer import *
 time_diff_data = TimeDiffDataTransformer()
 
 time_diff_data.make_all_transformations()
-df = time_diff_data.get_df()
+df_trained = time_diff_data.get_df()
 
-print(models)
-
-def preprocessData(data):
-    df = pd.DataFrame(data)
-    df["purchase_datetime_delta"] = 0
-    df["time_diff"] = 0
-    df["delivery_timestamp"] = 0
-    return df
+models = getTrainedModels()
 
 @app.route('/', methods=['POST'])
-def result():
-    print("NEW POST REQUEST")
+def handleRequest():
     data = request.json
-    print("DATA", data)  # json (if content-type of application/json is sent with the request)
 
-    df = preprocessData(data)
-    print(df.keys())
+    df = pd.DataFrame(data)
 
-    # prediction_base_model = models[0].predict(data)
-    # print(prediction_base_model)
+    new_data = TimeDiffDataTransformer()
+    new_data.make_all_transformations(df)
+    df_new = time_diff_data.get_df()
+    df_new = df_new.iloc[-1:]
+
+    y_test = df_new["time_diff"].to_numpy()
+    x_test = df_new.drop(columns="time_diff")
+
+    y_pred_df = create_df_with_predictions(models_list, x_test, y_test)
+
+    print("Predictions", y_pred_df)
 
     return "OK"
