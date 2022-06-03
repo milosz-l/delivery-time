@@ -1,23 +1,25 @@
 [{
-    "purchase_id": "21358",
-    "purchase_timestamp": "2021-12-24T16:43:44",
-    "delivery_company": "516",
+    "purchase_id": 20000,
+    "purchase_timestamp": "2021-11-07T06:15:13",
+    "delivery_company": 620,
 
-    "product_id": "1337",
-    "product_name": "Klawiatura i mysz Logitech MK470",
-    "category_path": "Zestaw klawiatura i mysz;Bezprzewodowe",
-    "price": "229",
-    "brand": "Logitech",
-    "weight_kg": "0.88",
-    "optional_attributes": "-",
+    "product_id": 1156,
+    "product_name": "Słuchawki nauszne Corsair HS35",
+    "category_path": "Mikrofony i słuchawki;Słuchawki przewodowe",
+    "price": 159.0,
+    "brand": "Corsair",
+    "weight_kg": 0.52,
+    "optional_attributes": {
+        "color": "czarny"
+    },
 
-    "session_id": "21002",
-    "event_type": "BUY PRODUCT",
-    "offered_discount": "20",
+    "session_id": 125,
+    "event_type": "BUY_PRODUCT",
+    "offered_discount": 15,
     
-    "user_id": "230",
-    "name": "Dariusz Ochał",
-    "city": "Warszawa",
-    "street": "aleja Kolorowa 39/82"
+    "user_id": 102,
+    "name": "Monika Forysiak",
+    "city": "Wrocław",
+    "street": "plac Dębowa 11/53"
     
 }]
