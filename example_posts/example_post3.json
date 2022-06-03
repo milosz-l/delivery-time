@@ -1,0 +1,23 @@
+[{
+    "purchase_id": "21358",
+    "purchase_timestamp": "2021-12-24T16:43:44",
+    "delivery_company": "516",
+
+    "product_id": "1337",
+    "product_name": "Klawiatura i mysz Logitech MK470",
+    "category_path": "Zestaw klawiatura i mysz;Bezprzewodowe",
+    "price": "229",
+    "brand": "Logitech",
+    "weight_kg": "0.88",
+    "optional_attributes": "-",
+
+    "session_id": "21002",
+    "event_type": "BUY PRODUCT",
+    "offered_discount": "20",
+    
+    "user_id": "230",
+    "name": "Dariusz Ochał",
+    "city": "Warszawa",
+    "street": "aleja Kolorowa 39/82"
+    
+}]
