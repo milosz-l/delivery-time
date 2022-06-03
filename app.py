@@ -32,4 +32,4 @@ def handleRequest():
 
     print("Predictions", y_pred_df)
 
-    return "OK"
+    return y_pred_df.to_dict()
