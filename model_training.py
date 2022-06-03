@@ -1,4 +1,7 @@
 
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.linear_model import LinearRegression, Ridge, Lasso
 import pandas as pd
 import numpy as np
 from TimeDiffDataTransformer import TimeDiffDataTransformer
@@ -6,6 +9,7 @@ from TimeDiffConstants import DATE_FORMAT, PRICE_TRESHOLD, WEIGHT_TRESHOLD, NUM_
 
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
+import warnings
 
 
 def split_data(df, target_column="time_diff"):
@@ -46,17 +50,11 @@ def print_percent_of_good_predictions(models_list, X_test, y_test, error=NUM_OF_
         predictions_time_diff = np.abs(y_test - predictions)
         num_of_good_predictions = (predictions_time_diff < error).sum()
         percent_of_good_predictions = num_of_good_predictions / len(predictions_time_diff)
-        print(f'number of good predictions for {type(model).__name__} = {num_of_good_predictions}')
-        print(f'which is {percent_of_good_predictions * 100}%')
-
-
-from sklearn.linear_model import LinearRegression, Ridge, Lasso
-from sklearn.tree import DecisionTreeRegressor
-from sklearn.ensemble import RandomForestRegressor
+        print(f'number of good predictions for {type(model).__name__} = {num_of_good_predictions}/{len(predictions_time_diff)}')
+        print(f'which is {percent_of_good_predictions * 100}%\n')
 
 
 # # preparing data
-
 time_diff_data = TimeDiffDataTransformer()
 
 time_diff_data.make_all_transformations()
@@ -68,15 +66,16 @@ X_train, X_test, y_train, y_test = split_data(df)
 def getTrainedModels():
     # # models
     models_list = [Ridge(alpha=0.1),
-                Lasso(alpha=0.1),
-                DecisionTreeRegressor(random_state=SEED),
-                RandomForestRegressor(random_state=SEED)]
+                   Lasso(alpha=0.1),
+                   DecisionTreeRegressor(random_state=SEED),
+                   RandomForestRegressor(random_state=SEED)]
 
     # # training model
     models_list = train_models(models_list, X_train, y_train)
     return models_list
 
 
+warnings.filterwarnings('ignore')
 models_list = getTrainedModels()
 
 y_pred_df = create_df_with_predictions(models_list, X_test, y_test)
