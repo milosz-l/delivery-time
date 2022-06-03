@@ -20,11 +20,9 @@ class TimeDiffDataTransformer:
         users_df = pd.read_json("data/users.jsonl", lines=True)
 
         self.df = TimeDiffDataTransformer._prepare_df(sessions_df, deliveries_df, products_df, users_df)
-       
+
         if type(request_df) == pd.DataFrame:
             self.df = pd.concat([self.df, request_df], ignore_index=True)
-            
-
 
     def _prepare_df(sessions_df, deliveries_df, products_df, users_df):
         # 1.
@@ -86,8 +84,10 @@ class TimeDiffDataTransformer:
     def drop_cols(self, additional_cols=None):
         if additional_cols is None:
             additional_cols = ["city_and_street",
-                               "brand",
-                               'product_name']
+                               'product_name',
+                               'product_id',
+                               'brand',
+                               'category_path']
         cols_to_drop = list(COLS_TO_DROP_ALWAYS)
         cols_to_drop.extend(additional_cols)
         self.df = self.df.drop(columns=cols_to_drop)
@@ -113,6 +113,7 @@ class TimeDiffDataTransformer:
         cols = set(cols)
         cols_in_df = set(self.df.columns.values.tolist())
         cols_to_one_hot = cols.intersection(cols_in_df)
+        print(self.df.columns)
         for col_name in cols_to_one_hot:
             self.df = TimeDiffDataTransformer._one_hot_encoding_single_col(self.df, col_name)
         self.df = self.df.dropna()
