@@ -64,10 +64,6 @@ def handleRequest():
     # getting last row of transformed data
     df_new = df_new.iloc[-1:]
 
-    print(df_new)
-    
-    print(purchase_timestamp)
-
     # data frames to test
     y_test = df_new["time_diff"].to_numpy()
     x_test = df_new.drop(columns="time_diff")
