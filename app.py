@@ -55,15 +55,15 @@ def handleRequest():
     # data from request
     data = request.json
 
-    global counter
     # data frame of a counter
+    global counter
     df_counter = pd.DataFrame({"counter": [counter]})
 
     # preprocessing data
     df = pd.DataFrame(data)
 
     # saving request to logs
-    df_counter.join(df).to_csv('requests.csv', index=False, mode='a')
+    df_counter.join(df).to_csv('logs/requests.csv', index=False, mode='a')
 
     df = preprocessData(df)
     purchase_timestamp = df["purchase_timestamp"]
@@ -95,12 +95,12 @@ def handleRequest():
     # saving prediction to logs
     df_random_forest = pd.DataFrame(delivery_timestamp_random_forest)
     df_ridge = pd.DataFrame(delivery_timestamp_ridge)
-    df_counter.join(df_random_forest).to_csv('RandomForestPredictions.csv', index=False, mode='a')
-    df_counter.join(df_ridge).to_csv('RidgeCVPredictions.csv', index=False, mode='a')
+    df_counter.join(df_random_forest).to_csv('logs/RandomForestPredictions.csv', index=False, mode='a')
+    df_counter.join(df_ridge).to_csv('logs/RidgeCVPredictions.csv', index=False, mode='a')
     
     # increasing counter
     counter += 1
-    # return "OK"
+    
     return {
         "RandomForestRegressor prediction": delivery_timestamp_random_forest[0],
         "Ridge prediction": delivery_timestamp_ridge[0]
