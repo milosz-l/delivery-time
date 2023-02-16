@@ -1,5 +1,4 @@
 .history/
-*.pdf
 *.xlsx
 .idea
 __pycache__/
