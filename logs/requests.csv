@@ -4,3 +4,5 @@ counter,purchase_id,purchase_timestamp,delivery_company,product_id,product_name,
 1,20000,2021-11-01T06:15:13,516,1156,Słuchawki nauszne Corsair HS35,Mikrofony i słuchawki;Słuchawki przewodowe,159.0,Corsair,0.52,{'color': 'czarny'},125,BUY_PRODUCT,10,223,Ewa Dynak,Wrocław,plac Fiołkowa 95/00
 counter,purchase_id,purchase_timestamp,delivery_company,product_id,product_name,category_path,price,brand,weight_kg,optional_attributes,session_id,event_type,offered_discount,user_id,name,city,street
 2,20000,2021-11-01T06:15:13,516,1156,Słuchawki nauszne Corsair HS35,Mikrofony i słuchawki;Słuchawki przewodowe,159.0,Corsair,0.52,{'color': 'czarny'},125,BUY_PRODUCT,10,223,Ewa Dynak,Wrocław,plac Fiołkowa 95/00
+counter,purchase_id,purchase_timestamp,delivery_company,product_id,product_name,category_path,price,brand,weight_kg,optional_attributes,session_id,event_type,offered_discount,user_id,name,city,street
+0,20000,2021-11-07T06:15:13,360,1156,Słuchawki nauszne Corsair HS35,Mikrofony i słuchawki;Słuchawki przewodowe,159.0,Corsair,0.52,{'color': 'czarny'},125,BUY_PRODUCT,10,113,Ada Klaus,Wrocław,pl. Spółdzielcza 129
