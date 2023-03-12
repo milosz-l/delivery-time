@@ -6,7 +6,7 @@ import pandas as pd
 import numpy as np
 import datetime
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
-from TimeDiffConstants import DATE_FORMAT, PRICE_TRESHOLD, WEIGHT_TRESHOLD, NUM_OF_HOURS, SEED, COLS_TO_DROP_ALWAYS
+from src.TimeDiffConstants import DATE_FORMAT, PRICE_TRESHOLD, WEIGHT_TRESHOLD, NUM_OF_HOURS, SEED, COLS_TO_DROP_ALWAYS
 
 
 class TimeDiffDataTransformer:

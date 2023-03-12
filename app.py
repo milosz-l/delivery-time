@@ -1,9 +1,9 @@
 from itertools import count
 from flask import Flask, request
-from model_training import *
+from src.model_training import getTrainedModels, create_df_with_predictions
 import pandas as pd
-from TimeDiffDataTransformer import *
-from TimeDiffConstants import *
+from src.TimeDiffDataTransformer import *
+from src.TimeDiffConstants import *
 
 
 app = Flask(__name__)

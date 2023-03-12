@@ -5,8 +5,8 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn.linear_model import LinearRegression, Ridge, Lasso, RidgeCV
 import pandas as pd
 import numpy as np
-from TimeDiffDataTransformer import TimeDiffDataTransformer
-from TimeDiffConstants import DATE_FORMAT, PRICE_TRESHOLD, WEIGHT_TRESHOLD, NUM_OF_HOURS, SEED, COLS_TO_DROP_ALWAYS, TEST_SIZE
+from src.TimeDiffDataTransformer import TimeDiffDataTransformer
+from src.TimeDiffConstants import DATE_FORMAT, PRICE_TRESHOLD, WEIGHT_TRESHOLD, NUM_OF_HOURS, SEED, COLS_TO_DROP_ALWAYS, TEST_SIZE
 
 from sklearn.model_selection import GridSearchCV, train_test_split
 from sklearn.preprocessing import StandardScaler
