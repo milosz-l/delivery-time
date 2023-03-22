@@ -8,7 +8,7 @@ NUM_OF_HOURS = 24
 SEED = randint(0, 100000)  # 42
 TEST_SIZE = 0.001
 
-COLS_TO_DROP_ALWAYS = ("delivery_timestamp",
+COLS_TO_DROP_ALWAYS = ["delivery_timestamp",
                        "session_id",
                        "purchase_id",
                        "event_type",
@@ -16,4 +16,4 @@ COLS_TO_DROP_ALWAYS = ("delivery_timestamp",
                        "user_id",
                        'offered_discount',
                        'optional_attributes',
-                       'purchase_timestamp')
+                       'purchase_timestamp']
